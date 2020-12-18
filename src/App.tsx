@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
+import { store } from './stores/rootStore'
+import {values} from 'mobx'
+
+
+
+
 
 function App() {
+
+  useEffect(() => {
+   store.setProducts()
+  }, [])
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {store.getProductsSum()}
+      {values(store.products).map(product => <div key={product.id}>{product.name}</div>)}
     </div>
   );
 }
 
-export default App;
+export default observer(App);
