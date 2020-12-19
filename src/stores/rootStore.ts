@@ -1,4 +1,4 @@
-import { types, flow } from "mobx-state-tree"
+import { types, flow, Instance } from "mobx-state-tree"
 import { Product } from "./product"
 import { commerce } from '../lib/commerce'
 import {values} from 'mobx'
@@ -12,6 +12,8 @@ export const RootStore = types
       const fetchProds = flow(function*() {
         const { data } = yield commerce.products.list()
         const initProducts = data.map((prod: any) => {
+          
+          // building object to match product model type
           return {
             id: prod.id,
             name: prod.name,
@@ -35,6 +37,8 @@ export const RootStore = types
 export const store = RootStore.create({
   products: []
 })
+
+export type RootStoreType = Instance<typeof RootStore>
 
 
 
