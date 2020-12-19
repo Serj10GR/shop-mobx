@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree"
+import { types, Instance } from "mobx-state-tree"
 
 export const Product = types.model({
   id: types.optional(types.identifier, ''),
@@ -7,3 +7,5 @@ export const Product = types.model({
   price: types.optional(types.number, 0),
   img: types.optional(types.string, ""),
 })
+
+export type ProductType = Instance<typeof Product>
