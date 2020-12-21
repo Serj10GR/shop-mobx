@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import {ProductType} from '../../../stores/product'
+
 import {
   ProductWrapper,
   ProductHeader,
@@ -10,6 +10,15 @@ import {
   AddBtn
 } from './styled'
 
+type TProduct = {
+  id: string,
+  price: number,
+  description: string,
+  img: string,
+  name: string,
+  addToCart: Function
+}
+
 
 const Product = ({
   id,
@@ -17,7 +26,8 @@ const Product = ({
   description,
   img,
   name,
-}: ProductType) => {
+  addToCart
+}: TProduct) => {
 
   console.log(name)
   return (
@@ -30,7 +40,7 @@ const Product = ({
      </ProductHeader>
      <Title>{name}</Title>
      <Description>{description}</Description>
-     <AddBtn>Add to Cart</AddBtn>
+     <AddBtn onClick={() => addToCart(id)} >Add to Cart</AddBtn>
    </ProductWrapper>
   )
 }

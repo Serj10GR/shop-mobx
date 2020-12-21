@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
+
+import {store } from '../../stores/rootStore'
+
 import {
   NavBarContainer,
   NavHeader,
@@ -9,8 +13,8 @@ import {
   CloseMenuIcon,
   ShoppingCartIcon,
   CartLink,
-  ShoppingCartItems,
   NavButtonsWrapper,
+  ShoppingCartItems,
   NavList,
   NavListItem,
 } from './styled'
@@ -18,6 +22,7 @@ import {
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen(!isOpen)
+
 
   return (
     <NavBarContainer>
@@ -27,9 +32,8 @@ const NavBar = () => {
           <NavButtonsWrapper>
             <CartLink to='/cart'>
               <ShoppingCartIcon />
-              {/* {cart.total_items > 0
-                && <ShoppingCartItems>{cart.total_items}</ShoppingCartItems>
-              } */}
+                 <ShoppingCartItems>{store.cart.cartItems.length}</ShoppingCartItems>
+              
             </CartLink>
             <NavButton onClick={handleToggle}>
               {isOpen ? <CloseMenuIcon /> : <NavMenuIcon />}
@@ -49,4 +53,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default observer(NavBar)

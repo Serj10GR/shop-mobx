@@ -1,26 +1,28 @@
-import {useEffect} from 'react'
-import { ProductsWrapper} from './styled'
-import Product from './Product'
-import { store } from '../../stores/rootStore'
 import { values } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
+import Product from './Product'
+import { store } from '../../stores/rootStore'
+
+import { ProductsWrapper} from './styled'
+
+
+
+
 const Products = () => {
-
-  useEffect(() => {
-    store.setProducts()
-  }, [])
-
+  store.cart.tryAction()
   return (
     <ProductsWrapper>
       {values(store.products)
         .map(product => 
-        <Product 
+        <Product
+          key={product.id} 
           name={product.name!}
           id={product.id!}
           price={product.price!}
           description={product.description?.slice(3, -4)!}
-          img={product.img!} 
+          img={product.img!}
+          addToCart={store.addToCart}
         />)}
     </ProductsWrapper>
   )
