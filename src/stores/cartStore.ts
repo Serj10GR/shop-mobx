@@ -31,23 +31,21 @@ export const CartStore = types
 
   // async actions
   .actions(self=> ({
-    afterCreate() {
-      const getCartData = async() => {
-        const res = await commerce.cart.retrieve()
-        const cartItems = res.line_items.map((item: any) => {
-          return {
-            id: item.id,
-            name: item.name,
-            description: item.description,
-            price: item.price.raw,
-            img: item.media.source,
-            quantity: item.quantity
-          }
-        })
-        self.setCart(cartItems, res.total, res.total_items)
-      }
-      getCartData()
-    },
+    async getCartData() {
+      const res = await commerce.cart.retrieve()
+      const cartItems = res.line_items.map((item: any) => {
+        return {
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price.raw,
+          img: item.media.source,
+          quantity: item.quantity
+        }
+      })
+      self.setCart(cartItems, res.total, res.total_items)
+      },
+
     async addToCart(productID: number | string, quantity: number){
       console.log('button was clicked')
       const res = await commerce.cart.add(productID, quantity)

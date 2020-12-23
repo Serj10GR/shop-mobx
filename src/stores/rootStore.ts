@@ -1,4 +1,4 @@
-import { types, flow, Instance } from "mobx-state-tree"
+import { types, Instance } from "mobx-state-tree"
 import { Product } from "./product"
 import { CartStore } from './cartStore'
 import { commerce } from '../lib/commerce'
@@ -9,24 +9,30 @@ export const RootStore = types
     products: types.optional(types.array(Product), []),
     cart: types.optional(CartStore, {})
   })
+  //Seters
+  .actions(self => ({
+    setProducts(products: any){
+      self.products = products
+    }
+
+  }))
+
+  //Async calls
   .actions((self) => ({
-    afterCreate() {
-      const fetchProds = flow(function* () {
-        const { data } = yield commerce.products.list()
-        const initProducts = data.map((prod: any) => {
-          // building object to match product model type
-          return {
-            id: prod.id,
-            name: prod.name,
-            img: prod.media.source,
-            description: prod.description,
-            price: prod.price.raw
-          }
-        })
-        self.products = initProducts
+    async fetchProds() {
+      const { data } = await commerce.products.list()
+      const initProducts = data.map((prod: any) => {
+        // building object to match product model type
+        return {
+          id: prod.id,
+          name: prod.name,
+          img: prod.media.source,
+          description: prod.description,
+          price: prod.price.raw
+        }
       })
-      fetchProds()
-    },
+      self.setProducts(initProducts)
+    }
   }))
   .views(self=> ({
     getProductsSum(){

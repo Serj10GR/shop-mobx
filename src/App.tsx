@@ -1,7 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import GlobalStyle from './globalStyles'
+import { store } from './stores/rootStore'
 
 import NavBar from './components/NavBar'
 
@@ -18,6 +19,11 @@ import CheckoutPage from './components/CheckoutPage'
 
 
 function App() {
+  useEffect(() => {
+    console.log('was mount')
+   store.fetchProds()
+   store.cart.getCartData()
+  }, [])
 
   return (
     <Fragment>
