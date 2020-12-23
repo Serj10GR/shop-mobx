@@ -1,4 +1,4 @@
-import { types, flow, Instance, getSnapshot } from "mobx-state-tree"
+import { types, flow, Instance } from "mobx-state-tree"
 import { Product } from "./product"
 import { CartStore } from './cartStore'
 import { commerce } from '../lib/commerce'
@@ -27,12 +27,6 @@ export const RootStore = types
       })
       fetchProds()
     },
-    addToCart(id: string) {
-      const prods = getSnapshot(self.products)
-      const item = prods.find(item => item.id === id)
-      self.cart.cartItems.push(item!)
-      console.log(self.cart.cartItems)
-    }
   }))
   .views(self=> ({
     getProductsSum(){
