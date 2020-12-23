@@ -32,7 +32,7 @@ const NavBar = () => {
           <NavButtonsWrapper>
             <CartLink to='/cart'>
               <ShoppingCartIcon />
-                 <ShoppingCartItems>{store.cart.cartItems.length}</ShoppingCartItems>
+                 <ShoppingCartItems>{store.cart.totalItems}</ShoppingCartItems>
               
             </CartLink>
             <NavButton onClick={handleToggle}>

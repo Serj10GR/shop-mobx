@@ -10,7 +10,6 @@ import { ProductsWrapper} from './styled'
 
 
 const Products = () => {
-  store.cart.tryAction()
   return (
     <ProductsWrapper>
       {values(store.products)
@@ -22,7 +21,7 @@ const Products = () => {
           price={product.price!}
           description={product.description?.slice(3, -4)!}
           img={product.img!}
-          addToCart={store.addToCart}
+          addToCart={store.cart.addToCart}
         />)}
     </ProductsWrapper>
   )
