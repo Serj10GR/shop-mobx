@@ -55,15 +55,14 @@ const CartPage = () => {
               </Fragment>
               : <Fragment>
                 {values(store.cart.cartItems)
-                  .map(item => 
+                  .map((item, i) => 
                     <CartItem 
-                      key={item.id}
-                      name={item.name!}
-                      id={item.id!}
-                      price={item.price!}
-                      img={item.img!}
+                      key={i}
+                      name={item.product.name!}
+                      id={item.product.id!}
+                      price={item.product.price!}
+                      img={item.product.img!}
                       quantity={item.quantity!}
-
                     />)}
               </Fragment>
           }

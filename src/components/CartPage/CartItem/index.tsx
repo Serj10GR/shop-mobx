@@ -34,7 +34,7 @@ const CartItem = ({
         <NumberSpan>{quantity}</NumberSpan>
         <ArrowDown onClick={() => console.log('down')} />
       </QuantWrapper>
-      <PriceWrapper>{price} MDL</PriceWrapper>
+      <PriceWrapper>{price * quantity} MDL</PriceWrapper>
       <CloseButton onClick={() => console.log('remove')}>
         <CloseIcon />
       </CloseButton>

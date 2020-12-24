@@ -1,52 +1,49 @@
+import { types, Instance } from 'mobx-state-tree'
 
-import { types, Instance, getRoot } from 'mobx-state-tree'
-import { values } from 'mobx'
+import { Product, ProductType } from './product'
+
+
 
 export const CartItem = types
   .model({
-      id: types.optional(types.identifier, ''),
-      name: types.optional(types.string, ""),
-      description: types.optional(types.string, ""),
-      price: types.optional(types.number, 0),
-      img: types.optional(types.string, ""),
-      quantity: types.optional(types.number, 1)
+      product: Product,
+      quantity: 0,
   })
-  .actions(self => ({
-    increaseQunat() {
-      self.quantity = self.quantity++
+  .views(self => ({
+    getPrice(){
+      return self.product.price * self.quantity
     }
   }))
-export const cartItemStore = CartItem.create({})
+  .actions((self) => ({
+    increaseQuantity(number: number) {
+      self.quantity += number
+    },
+    setQuantity(number: number) {
+      self.quantity = number
+    }
+  }))
+
 export type TCartItem = Instance<typeof CartItem>
+
+
+
 
 export const CartStore = types
   .model({
     cartItems: types.optional(types.array(CartItem), []),
     totalItems: types.optional(types.number, 0)
   })
-
-  // Setters
   .actions(self=> ({
-    setTotalItems(number: number) {
-     self.totalItems = number
-    }
-  }))
-  .actions(self=> ({
-    addToCart(prodID: string){
-      console.log('click add')
-     const {products} = getRoot(self)
-     const target  = values(products).find((item: any) => item.id === prodID)
-     const item = {
-       id: target.id,
-       name: target.name,
-       description: target.description,
-       price: target.price,
-       img: target.img,
-       quantity: 1
-     }
-      self.cartItems.push(item)
-     self.setTotalItems(self.cartItems.length)
-    }
+    addToCart(product: ProductType, quantity = 1) {
+      let entry = self.cartItems.find((item) => item.product.id === product.id)
+      console.log(entry)
+      if (!entry) {
+        self.cartItems.push({ product: product })
+        entry = self.cartItems[self.cartItems.length - 1]
+      }
+      entry.increaseQuantity(quantity)
+    },
+    
   }))
   .views(self => ({
     getNumberOfItems() {
