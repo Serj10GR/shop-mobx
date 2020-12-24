@@ -22,7 +22,6 @@ function App() {
   useEffect(() => {
     console.log('was mount')
    store.fetchProds()
-   store.cart.getCartData()
   }, [])
 
   return (

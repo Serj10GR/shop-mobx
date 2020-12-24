@@ -16,7 +16,7 @@ type TProduct = {
   description: string,
   img: string,
   name: string,
-  addToCart: Function
+  addToCart: any
 }
 
 
@@ -39,7 +39,7 @@ const Product = ({
      </ProductHeader>
      <Title>{name}</Title>
      <Description>{description}</Description>
-     <AddBtn onClick={() => addToCart(id, 1)} >Add to Cart</AddBtn>
+     <AddBtn onClick={() => addToCart(id)} >Add to Cart</AddBtn>
    </ProductWrapper>
   )
 }
