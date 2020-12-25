@@ -1,5 +1,6 @@
 import {Fragment} from 'react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { store } from '../../stores/rootStore'
 import { values } from 'mobx'
 
@@ -54,15 +55,17 @@ const CartPage = () => {
                 </CartText>
               </Fragment>
               : <Fragment>
-                {values(store.cart.cartItems)
+                {store.cart.cartItems
                   .map((item, i) => 
                     <CartItem 
                       key={i}
                       name={item.product.name!}
                       id={item.product.id!}
-                      price={item.product.price!}
                       img={item.product.img!}
+                      getPrice={item.getPrice}
                       quantity={item.quantity!}
+                      cartItem={item}
+                      removeItem={store.cart.removeCartItem}
                     />)}
               </Fragment>
           }
@@ -78,4 +81,4 @@ const CartPage = () => {
   )
 }
 
-export default CartPage
+export default observer(CartPage)

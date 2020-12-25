@@ -31,7 +31,7 @@ const NavBar = () => {
           <NavButtonsWrapper>
             <CartLink to='/cart'>
               <ShoppingCartIcon />
-                 <ShoppingCartItems>{store.cart.totalItems}</ShoppingCartItems>
+                 <ShoppingCartItems>{store.cart.getNumberOfItems()}</ShoppingCartItems>
               
             </CartLink>
             <NavButton onClick={handleToggle}>

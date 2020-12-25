@@ -1,7 +1,7 @@
-import { types, Instance } from 'mobx-state-tree'
+import { types, Instance, destroy } from 'mobx-state-tree'
+
 
 import { Product, ProductType } from './product'
-
 
 
 export const CartItem = types
@@ -9,17 +9,16 @@ export const CartItem = types
       product: Product,
       quantity: 0,
   })
-  .views(self => ({
-    getPrice(){
-      return self.product.price * self.quantity
-    }
-  }))
   .actions((self) => ({
     increaseQuantity(number: number) {
       self.quantity += number
     },
     setQuantity(number: number) {
       self.quantity = number
+    },
+    //move to views
+    getPrice() {
+      return self.product.price * self.quantity
     }
   }))
 
@@ -31,23 +30,23 @@ export type TCartItem = Instance<typeof CartItem>
 export const CartStore = types
   .model({
     cartItems: types.optional(types.array(CartItem), []),
-    totalItems: types.optional(types.number, 0)
   })
   .actions(self=> ({
     addToCart(product: ProductType, quantity = 1) {
       let entry = self.cartItems.find((item) => item.product.id === product.id)
-      console.log(entry)
       if (!entry) {
         self.cartItems.push({ product: product })
         entry = self.cartItems[self.cartItems.length - 1]
       }
       entry.increaseQuantity(quantity)
     },
-    
+    removeCartItem(item: TCartItem){
+      destroy(item)
+    } 
   }))
   .views(self => ({
     getNumberOfItems() {
-      return self.cartItems.length
+      return self.cartItems.reduce((sum, item) => sum + item.quantity, 0)
     }
   }))
   

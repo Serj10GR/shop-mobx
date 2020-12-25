@@ -1,3 +1,5 @@
+import { observer } from 'mobx-react-lite'
+
 import {
   CartItemWrapper,
   ItemTitle,
@@ -10,12 +12,15 @@ import {
   CloseIcon
 } from './styled'
 
+
 type TCartItem = {
   id?: string,
   name: string,
   quantity: number,
   img: string,
-  price: number
+  getPrice: Function
+  cartItem: any,
+  removeItem: Function
 }
 
 const CartItem = ({
@@ -23,7 +28,9 @@ const CartItem = ({
   name,
   quantity,
   img,
-  price
+  getPrice,
+  cartItem,
+  removeItem,
   }: TCartItem) => {
   return (
     <CartItemWrapper>
@@ -34,12 +41,12 @@ const CartItem = ({
         <NumberSpan>{quantity}</NumberSpan>
         <ArrowDown onClick={() => console.log('down')} />
       </QuantWrapper>
-      <PriceWrapper>{price * quantity} MDL</PriceWrapper>
-      <CloseButton onClick={() => console.log('remove')}>
+      <PriceWrapper>{getPrice()} MDL</PriceWrapper>
+      <CloseButton onClick={() => removeItem(cartItem)}>
         <CloseIcon />
       </CloseButton>
     </CartItemWrapper>
   )
 }
 
-export default CartItem
+export default observer(CartItem)
