@@ -1,11 +1,10 @@
 import {Fragment} from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
+
 import { store } from '../../stores/rootStore'
-import { values } from 'mobx'
 
 import CartItem from './CartItem'
-
 
 import {
   CartContainer,
@@ -20,25 +19,18 @@ import {
   Button,
 } from './styled'
 
-
-
-
-
-
-
-
 const CartPage = () => {
-  const isEmpty = values(store.cart.cartItems).length === 0 
- 
+  const isEmpty = store.cart.getNumberOfItems() === 0
+  const total = store.cart.getTotalSum()
   return (
     <CartContainer>
       <CartWrapper>
         <CartHeader>
           <CartTitle>My Cart</CartTitle>
           {
-            isEmpty
+            !isEmpty
             && 
-            <TotalPrice>100</TotalPrice>
+            <TotalPrice>{total} MDL</TotalPrice>
           }
         </CartHeader>
         <CartContent isEmptyCart={isEmpty}>

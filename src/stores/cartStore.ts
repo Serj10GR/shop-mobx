@@ -47,6 +47,9 @@ export const CartStore = types
   .views(self => ({
     getNumberOfItems() {
       return self.cartItems.reduce((sum, item) => sum + item.quantity, 0)
+    },
+    getTotalSum(){
+      return self.cartItems.reduce((sum, item) => sum + item.product.price, 0 )
     }
   }))
   

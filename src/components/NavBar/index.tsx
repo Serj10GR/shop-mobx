@@ -22,7 +22,7 @@ import {
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen(!isOpen)
-
+  const itemsAmount = store.cart.getNumberOfItems()
   return (
     <NavBarContainer>
       <NavCenter>
@@ -31,8 +31,11 @@ const NavBar = () => {
           <NavButtonsWrapper>
             <CartLink to='/cart'>
               <ShoppingCartIcon />
-                 <ShoppingCartItems>{store.cart.getNumberOfItems()}</ShoppingCartItems>
-              
+               {
+                 itemsAmount > 0
+                 &&
+                <ShoppingCartItems>{itemsAmount}</ShoppingCartItems>
+               }
             </CartLink>
             <NavButton onClick={handleToggle}>
               {isOpen ? <CloseMenuIcon /> : <NavMenuIcon />}
