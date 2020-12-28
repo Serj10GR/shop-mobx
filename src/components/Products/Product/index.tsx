@@ -16,7 +16,7 @@ type TProduct = {
   description: string,
   img: string,
   name: string,
-  addToCart?: any,
+  addToCart: Function,
 }
 
 

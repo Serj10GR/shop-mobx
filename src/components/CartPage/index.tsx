@@ -21,7 +21,7 @@ import {
 
 const CartPage = () => {
   const isEmpty = store.cart.getNumberOfItems() === 0
-  const total = store.cart.getTotalSum()
+
   return (
     <CartContainer>
       <CartWrapper>
@@ -30,7 +30,7 @@ const CartPage = () => {
           {
             !isEmpty
             && 
-            <TotalPrice>{total} MDL</TotalPrice>
+            <TotalPrice>{store.cart.getTotalSum()} MDL</TotalPrice>
           }
         </CartHeader>
         <CartContent isEmptyCart={isEmpty}>
@@ -52,12 +52,13 @@ const CartPage = () => {
                     <CartItem 
                       key={i}
                       name={item.product.name!}
-                      id={item.product.id!}
                       img={item.product.img!}
                       getPrice={item.getPrice}
                       quantity={item.quantity!}
                       cartItem={item}
                       removeItem={store.cart.removeCartItem}
+                      increaseQuant={item.increaseQuantity}
+                      decreaseQuant={item.decreaseQuantity}
                     />)}
               </Fragment>
           }

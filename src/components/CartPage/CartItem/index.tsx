@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { TCartItem } from '../../../stores/cartStore'
 
 import {
   CartItemWrapper,
@@ -13,33 +14,37 @@ import {
 } from './styled'
 
 
-type TCartItem = {
-  id?: string,
+type CartItemTypes = {
   name: string,
   quantity: number,
   img: string,
   getPrice: Function
-  cartItem: any,
-  removeItem: Function
+  cartItem: TCartItem,
+  removeItem: Function,
+  increaseQuant: Function,
+  decreaseQuant: Function,
 }
 
 const CartItem = ({
-  id,
   name,
   quantity,
   img,
   getPrice,
   cartItem,
   removeItem,
-  }: TCartItem) => {
+  increaseQuant,
+  decreaseQuant
+  }: CartItemTypes) => {
+    if(quantity < 1) removeItem(cartItem)
+
   return (
     <CartItemWrapper>
       <img src={img} alt={name} />
       <ItemTitle>{name}</ItemTitle>
       <QuantWrapper>
-        <ArrowUp onClick={() => console.log('up')} />
+        <ArrowDown onClick={() => decreaseQuant(1)} />
         <NumberSpan>{quantity}</NumberSpan>
-        <ArrowDown onClick={() => console.log('down')} />
+        <ArrowUp onClick={() => increaseQuant(1)} />
       </QuantWrapper>
       <PriceWrapper>{getPrice()} MDL</PriceWrapper>
       <CloseButton onClick={() => removeItem(cartItem)}>

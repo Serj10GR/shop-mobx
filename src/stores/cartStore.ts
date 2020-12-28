@@ -13,6 +13,10 @@ export const CartItem = types
     increaseQuantity(number: number) {
       self.quantity += number
     },
+    decreaseQuantity(number: number){
+      self.quantity -= number
+
+    },
     setQuantity(number: number) {
       self.quantity = number
     },
@@ -28,7 +32,7 @@ export type TCartItem = Instance<typeof CartItem>
 
 
 export const CartStore = types
-  .model({
+  .model("CartStore", {
     cartItems: types.optional(types.array(CartItem), []),
   })
   .actions(self=> ({
@@ -49,7 +53,7 @@ export const CartStore = types
       return self.cartItems.reduce((sum, item) => sum + item.quantity, 0)
     },
     getTotalSum(){
-      return self.cartItems.reduce((sum, item) => sum + item.product.price, 0 )
+      return self.cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0 )
     }
   }))
   
