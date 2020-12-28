@@ -1,10 +1,34 @@
+import AdressForm from '../AdressForm'
+import {
+  CheckOutContainer,
+  CheckOutWrapper,
+  Header,
+  Title,
+  InnerContent,
+} from './styled'
 
 
 const CheckoutPage = () => {
   return (
-    <div>
-      
-    </div>
+    <CheckOutContainer>
+      <CheckOutWrapper>
+        <Header>
+          {/* <Title>{shippingData ? 'Confirmare' : "Checkout"}</Title> */}
+        </Header>
+        <InnerContent>
+          <AdressForm />
+          {/* {!shippingData
+            ? <AdressForm handleSubmit={handleUserDataSubmit} />
+            : <ConfirmBlock
+              cart={cart}
+              submitOrder={clickHandler}
+              {...shippingData}
+              handleBackStep={handleBackStep}
+            />
+          } */}
+        </InnerContent>
+      </CheckOutWrapper>
+    </CheckOutContainer>
   )
 }
 
