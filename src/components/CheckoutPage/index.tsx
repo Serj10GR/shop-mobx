@@ -13,7 +13,7 @@ const CheckoutPage = () => {
     <CheckOutContainer>
       <CheckOutWrapper>
         <Header>
-          {/* <Title>{shippingData ? 'Confirmare' : "Checkout"}</Title> */}
+           <Title>'Confirmare' : "Checkout"</Title>
         </Header>
         <InnerContent>
           <AdressForm />

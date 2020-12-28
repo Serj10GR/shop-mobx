@@ -1,16 +1,32 @@
 import { InputWrapper, Label, Input } from './styled'
 
-const CustomInput = () => {
+type TInput = {
+  required?: boolean,
+  label: string,
+  name: string,
+  type: string,
+  handleChange?: any,
+  value?: string
+}
+
+const CustomInput = ({
+  required,
+  label,
+  name,
+  type,
+  handleChange,
+  value,
+  }: TInput) => {
   return (
     <InputWrapper>
-      <Label>dynamic label..</Label>
+      <Label>{label}</Label>
       <Input
-        // required={required}
-        // name={name}
-        // placeholder={placeholder}
-        // type={type}
-        // pattern={pattern}
-        // onChange={onChange}
+        required={required}
+        name={name}
+        placeholder={label}
+        type={type}
+        onChange={handleChange}
+        value={value}
       />
     </InputWrapper>
   )

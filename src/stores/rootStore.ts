@@ -1,13 +1,15 @@
 import { types, Instance } from "mobx-state-tree"
 import { Product } from "./product"
 import { CartStore } from './cartStore'
+import { UserModel } from './userStore'
 import { commerce } from '../lib/commerce'
-import {values} from 'mobx'
+import { values } from 'mobx'
 
 export const RootStore = types
   .model({
     products: types.optional(types.array(Product), []),
-    cart: types.optional(CartStore, {})
+    cart: types.optional(CartStore, {}),
+    user: types.optional(UserModel, {})
   })
   //Seters
   .actions(self => ({

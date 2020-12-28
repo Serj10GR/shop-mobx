@@ -1,6 +1,10 @@
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
+import { store } from '../../stores/rootStore'
+import CustomInput from './components/CustomInput'
+import CustomDropDown from './components/CustomDropDown'
+
 
 import {
   FormTitle,
@@ -14,34 +18,30 @@ const AdressForm = () => {
     <Fragment>
       <FormTitle>Fă comanda <br /> Noi revenim cu apel pentru confirmare </FormTitle>
       <Form>
-        {/* <CustomInput
+         <CustomInput
           required
           name='name'
           label='Numele'
-          placeholder='Numele'
           type='text'
-          onChange={handleChange}
-          value={shippingData.name}
+          handleChange={(e: any) => store.user.setName(e.target.value)}
+          value={store.user.name}
         />
         <CustomInput
           required
           name='tel'
           label='Telefon'
-          placeholder='Telefon'
           type='tel'
-          onChange={handleChange}
-          value={shippingData.tel}
+          //onChange={handleChange}
+          //value={shippingData.tel}
         />
         <CustomInput
-          // required to put condition depend on city
           name='adress'
           label='Adresa'
-          placeholder='Adresa'
           type='text'
-          onChange={handleChange}
-          value={shippingData.adress}
-        />
-        <CustomDropDown handleChange={handleChange} value={shippingData.city} /> */}
+          //onChange={handleChange}
+          //value={shippingData.adress}
+        /> 
+        <CustomDropDown  />
         <ButtonsContainer>
           <Link to='/cart'>
             <Button>Back</Button>
