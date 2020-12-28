@@ -1,36 +1,47 @@
 import { Fragment } from 'react'
+import { store } from '../../stores/rootStore'
+
+
+import { Button, ButtonsContainer } from '../AdressForm/styled'
 import { TextLine, Cell, Subtitle, Price } from './styled'
 
-const ConfirmBlock = () => {
+type TConfirm = {
+  setIsConfirmed: Function
+}
+const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
   return (
     <Fragment>
       <Subtitle>Comanda: </Subtitle>
-      {/* {cart.line_items.map(item => {
+      {store.cart.cartItems.map(item => {
         return <TextLine>
-          {item.name}
-          <Cell isPrice>{item.price.formatted_with_code}</Cell>
+          <Cell>{item.product.name}</Cell>
+          <Cell isPrice>{item.product.price}</Cell>
         </TextLine>
-      })} */}
-      <Price>Total: <span></span></Price>
+      })}
+      <Price>Total: <span>{store.cart.getTotalSum()}</span></Price>
 
       <Subtitle>Livrare: </Subtitle>
       <TextLine>
-        Nume: <Cell></Cell>
+        <Cell>Nume:</Cell>
+        <Cell>{store.user.name}</Cell>
       </TextLine>
       <TextLine>
-        Telefon: <Cell></Cell>
+        <Cell>Telefon:</Cell>
+        <Cell>{store.user.phone}</Cell>
       </TextLine>
       <TextLine>
-        Adresa: <Cell></Cell>
+        <Cell>Adresa:</Cell>
+        <Cell>{store.user.adress}</Cell>
       </TextLine>
       <TextLine>
-        Localitate: <Cell></Cell>
+        <Cell>Localitate:</Cell>
+        <Cell>{store.user.city}</Cell>
       </TextLine>
 
-      {/* <ButtonsContainer isConfirm>
-        <Button onClick={handleBackStep}>Back</Button>
-        <Button isPrimary onClick={submitOrder}>Confirm</Button>
-      </ButtonsContainer> */}
+      <ButtonsContainer isConfirm>
+        <Button onClick={() => setIsConfirmed(false)}>Back</Button>
+        <Button isPrimary>Confirm</Button>
+      </ButtonsContainer>
 
     </Fragment>
   )

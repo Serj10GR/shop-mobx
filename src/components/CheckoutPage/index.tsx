@@ -1,4 +1,7 @@
+import { useState } from 'react' 
 import AdressForm from '../AdressForm'
+import ConfirmBlock from '../ConfirmBlock'
+
 import {
   CheckOutContainer,
   CheckOutWrapper,
@@ -9,23 +12,20 @@ import {
 
 
 const CheckoutPage = () => {
+  const [isConfirmed, setCofirmed] = useState(false)
+
   return (
     <CheckOutContainer>
       <CheckOutWrapper>
         <Header>
-           <Title>'Confirmare' : "Checkout"</Title>
+          <Title>{!isConfirmed ? "Checkout" : 'Confirmare'}</Title>
         </Header>
         <InnerContent>
-          <AdressForm />
-          {/* {!shippingData
-            ? <AdressForm handleSubmit={handleUserDataSubmit} />
-            : <ConfirmBlock
-              cart={cart}
-              submitOrder={clickHandler}
-              {...shippingData}
-              handleBackStep={handleBackStep}
-            />
-          } */}
+          {
+            !isConfirmed
+            ? <AdressForm setIsConfirmed={setCofirmed} />
+            : <ConfirmBlock setIsConfirmed={setCofirmed} />
+          }
         </InnerContent>
       </CheckOutWrapper>
     </CheckOutContainer>

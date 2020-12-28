@@ -13,41 +13,44 @@ import {
   Button
 } from './styled'
 
-const AdressForm = () => {
+type TAdressForm = {
+  setIsConfirmed : Function
+}
+
+const AdressForm = ({setIsConfirmed} : TAdressForm) => {
   return (
     <Fragment>
       <FormTitle>Fă comanda <br /> Noi revenim cu apel pentru confirmare </FormTitle>
-      <Form>
+      <Form onSubmit={() => setIsConfirmed(true)}>
          <CustomInput
           required
           name='name'
           label='Numele'
           type='text'
           handleChange={(e: any) => store.user.setName(e.target.value)}
-          value={store.user.name}
         />
         <CustomInput
           required
           name='tel'
           label='Telefon'
           type='tel'
-          //onChange={handleChange}
-          //value={shippingData.tel}
+          handleChange={(e: any) => store.user.setPhone(e.target.value)}
         />
         <CustomInput
           name='adress'
           label='Adresa'
           type='text'
-          //onChange={handleChange}
-          //value={shippingData.adress}
+          handleChange={(e: any) => store.user.setAdress(e.target.value)}
         /> 
-        <CustomDropDown  />
+        <CustomDropDown
+          handleChange={(e: any) => store.user.setCity(e.target.value)}
+        />
         <ButtonsContainer>
           <Link to='/cart'>
             <Button>Back</Button>
           </Link>
-
-          <Button type='submit' isPrimary>Next</Button>
+          <Button 
+            type='submit' isPrimary>Next</Button>
         </ButtonsContainer>
       </Form>
     </Fragment>

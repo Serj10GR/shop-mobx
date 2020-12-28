@@ -33,7 +33,6 @@ export const Input = styled.input`
 
   :focus {
   padding-bottom: 6px;  
-  font-weight: 700;
   border-width: 3px;
   border-image: linear-gradient(to right, #11998e,#38ef7d);
   border-image-slice: 1;
