@@ -1,15 +1,19 @@
+import { observer } from 'mobx-react-lite'
+import { ChangeEvent } from 'react'
 import { DropDownWrapper, Select, Option, Label } from './styled'
 
 type TDropDown  = {
-  handleChange: any
+  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void
+  value: string
 }
-const CustomDropDown = ({handleChange} : TDropDown) => {
+const CustomDropDown = ({handleChange, value} : TDropDown) => {
   return (
     <DropDownWrapper>
       <Label>Localitate</Label>
       <Select
         onChange={handleChange}
         name='city'
+        value={value}
       >
         <Option value=''>Select City</Option>
         <Option value='Cimișlia'>Cimișlia</Option>
@@ -22,4 +26,4 @@ const CustomDropDown = ({handleChange} : TDropDown) => {
   )
 }
 
-export default CustomDropDown
+export default observer(CustomDropDown)

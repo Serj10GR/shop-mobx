@@ -6,6 +6,7 @@ type TInput = {
   name: string,
   type: string,
   handleChange?: any,
+  value: string,
 }
 
 const CustomInput = ({
@@ -14,6 +15,7 @@ const CustomInput = ({
   name,
   type,
   handleChange,
+  value,
   }: TInput) => {
   return (
     <InputWrapper>
@@ -24,6 +26,7 @@ const CustomInput = ({
         placeholder={label}
         type={type}
         onChange={handleChange}
+        value={value}
       />
     </InputWrapper>
   )

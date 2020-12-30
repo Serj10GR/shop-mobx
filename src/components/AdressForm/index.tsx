@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 
 import { store } from '../../stores/rootStore'
 import CustomInput from './components/CustomInput'
@@ -28,6 +29,7 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
           label='Numele'
           type='text'
           handleChange={(e: any) => store.user.setName(e.target.value)}
+          value={store.user.name}
         />
         <CustomInput
           required
@@ -35,15 +37,18 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
           label='Telefon'
           type='tel'
           handleChange={(e: any) => store.user.setPhone(e.target.value)}
+          value={store.user.phone}
         />
         <CustomInput
           name='adress'
           label='Adresa'
           type='text'
           handleChange={(e: any) => store.user.setAdress(e.target.value)}
+          value={store.user.adress}
         /> 
         <CustomDropDown
           handleChange={(e: any) => store.user.setCity(e.target.value)}
+          value={store.user.city}
         />
         <ButtonsContainer>
           <Link to='/cart'>
@@ -57,4 +62,4 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
   )
 }
 
-export default AdressForm
+export default observer(AdressForm)
