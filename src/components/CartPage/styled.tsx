@@ -12,6 +12,10 @@ export const CartWrapper = styled.div`
   width: 474px;
   margin: 0 auto;
   color: #1B2968;
+
+   @media (max-width: 560px) {
+    width: 100%;
+  }
 `
 
 export const CartHeader = styled.header`
