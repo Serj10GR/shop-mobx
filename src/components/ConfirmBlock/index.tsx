@@ -6,7 +6,13 @@ import { observer } from 'mobx-react-lite'
 import { store } from '../../stores/rootStore'
 
 import { Button, ButtonsContainer } from '../AdressForm/styled'
-import { TextLine, Cell, Subtitle, Price } from './styled'
+import { 
+  TextLine,
+  Cell,
+  Subtitle,
+  Price,
+  DoneIcon
+ } from './styled'
 
 type TConfirm = {
   setIsConfirmed: Function
@@ -74,7 +80,9 @@ const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
             </ButtonsContainer>
           </Fragment>
         : <Fragment>
-          <h1>Comanda a fost trimisa cu succes!</h1>
+          <h2>Comanda a fost trimisa cu succes!</h2>
+          <DoneIcon />
+          <h4>In scurt timp revenim cu un apel pentru confirmare</h4>
         </Fragment>
       }
       

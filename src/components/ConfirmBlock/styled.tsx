@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MdCheck } from "react-icons/md";
 
 export const Subtitle = styled.h3`
   margin-bottom: 15px;
@@ -34,5 +35,10 @@ export const Price = styled.div`
    color: #DC4763;
 
  }
-
+`
+export const DoneIcon = styled(MdCheck)`
+  font-size: 4rem;
+  color: green;
+  font-weight: bold;
+  margin: 0.5em 0;
 `

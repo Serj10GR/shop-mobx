@@ -21,7 +21,7 @@ type TAdressForm = {
 const AdressForm = ({setIsConfirmed} : TAdressForm) => {
   return (
     <Fragment>
-      <FormTitle>Fă comanda <br /> Noi revenim cu apel pentru confirmare </FormTitle>
+      <FormTitle>Completeaza datele pentru livrare</FormTitle>
       <Form onSubmit={() => setIsConfirmed(true)}>
          <CustomInput
           required
