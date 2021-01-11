@@ -1,11 +1,11 @@
 import { Fragment } from 'react'
 import Products from '../Products'
-
+import Categories from '../Categories'
 
 const HomePage = () => {
   return (
     <Fragment>
-      {/* {to add categories filter} */}
+      <Categories />
       <Products />
     </Fragment>
   )
