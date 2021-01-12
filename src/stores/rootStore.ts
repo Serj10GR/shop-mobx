@@ -1,10 +1,12 @@
-import { types, Instance } from "mobx-state-tree"
-import { Product } from "./product"
+import { types, Instance, cast } from "mobx-state-tree"
+import { Product, TProduct } from "./product"
 import { CartStore } from './cartStore'
 import { UserModel } from './userStore'
-import { Category } from './category'
+import { Category, TCategory } from './category'
 import { commerce } from '../lib/commerce'
 import { values } from 'mobx'
+
+
 
 export const RootStore = types
   .model({
@@ -15,11 +17,11 @@ export const RootStore = types
   })
   //Seters
   .actions(self => ({
-    setProducts(products: any){
-      self.products = products
+    setProducts(products: Array<TProduct>){
+      self.products = cast(products)
     },
-    setCategories(categories: any) {
-      self.categories = categories
+    setCategories(categories: Array<TCategory>) {
+      self.categories = cast(categories)
     }
 
   }))

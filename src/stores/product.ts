@@ -8,4 +8,4 @@ export const Product = types.model({
   img: types.optional(types.string, ""),
 })
 
-export interface ProductType extends Instance<typeof Product> {}
+export interface TProduct extends Instance<typeof Product> {}

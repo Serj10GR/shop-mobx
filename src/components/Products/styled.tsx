@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export const ProductsWrapper = styled.section`
   display: grid;

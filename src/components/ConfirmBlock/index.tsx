@@ -18,15 +18,15 @@ type TConfirm = {
 }
 const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
   const [isSended, setIsSended] = useState(false)
-  const { user, cart } = useStore()
+  const { user: {name, phone, city, adress}, cart } = useStore()
 
   const emailProps = {
-    name: user.name,
-    mob: user.phone,
+    name,
+    mob: phone,
     items: cart.cartItems.map((item, ) => `${item.product.name} - ${item.quantity} `).join('/-/'),
     total: cart.getTotalSum(),
-    loc: user.city,
-    address: user.adress
+    loc: city,
+    address: adress
   }
 
   const sendDataByMail = () => {
@@ -57,19 +57,19 @@ const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
             <Subtitle>Livrare: </Subtitle>
             <TextLine>
               <Cell>Nume:</Cell>
-              <Cell>{user.name}</Cell>
+              <Cell>{name}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Telefon:</Cell>
-              <Cell>{user.phone}</Cell>
+              <Cell>{phone}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Adresa:</Cell>
-              <Cell>{user.adress}</Cell>
+              <Cell>{adress}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Localitate:</Cell>
-              <Cell>{user.city}</Cell>
+              <Cell>{city}</Cell>
             </TextLine>
 
             <ButtonsContainer isConfirm>

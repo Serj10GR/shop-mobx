@@ -1,5 +1,5 @@
 import { types, Instance, destroy } from 'mobx-state-tree'
-import { Product, ProductType } from './product'
+import { Product, TProduct } from './product'
 
 
 export const CartItem = types
@@ -34,7 +34,7 @@ export const CartStore = types
     cartItems: types.optional(types.array(CartItem), []),
   })
   .actions(self=> ({
-    addToCart(product: ProductType, quantity = 1) {
+    addToCart(product: TProduct, quantity = 1) {
       let entry = self.cartItems.find((item) => item.product.id === product.id)
       if (!entry) {
         self.cartItems.push({ product: product })
