@@ -1,11 +1,12 @@
-import { store } from '../../stores/rootStore'
+import { useStore } from '../../hooks/useStore'
 
 import { Wrapper, Button } from './styled'
 
 const Categories = () => {
+  const { rootStore } = useStore()
   return (
     <Wrapper>
-      {store.categories.map(category => <Button>{category.name}</Button>)}
+      {rootStore.categories.map(category => <Button>{category.name}</Button>)}
     </Wrapper>
   )
 }

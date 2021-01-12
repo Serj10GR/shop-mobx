@@ -2,7 +2,7 @@ import {Fragment} from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { store } from '../../stores/rootStore'
+import { useStore } from '../../hooks/useStore'
 
 import CartItem from './CartItem'
 
@@ -20,7 +20,8 @@ import {
 } from './styled'
 
 const CartPage = () => {
-  const isEmpty = store.cart.getNumberOfItems() === 0
+  const { cart } = useStore()
+  const isEmpty = cart.getNumberOfItems() === 0
 
   return (
     <CartContainer>
@@ -30,7 +31,7 @@ const CartPage = () => {
           {
             !isEmpty
             && 
-            <TotalPrice>{store.cart.getTotalSum()} MDL</TotalPrice>
+            <TotalPrice>{cart.getTotalSum()} MDL</TotalPrice>
           }
         </CartHeader>
         <CartContent isEmptyCart={isEmpty}>
@@ -47,7 +48,7 @@ const CartPage = () => {
                 </CartText>
               </Fragment>
               : <Fragment>
-                {store.cart.cartItems
+                {cart.cartItems
                   .map((item, i) => 
                     <CartItem 
                       key={i}
@@ -56,7 +57,7 @@ const CartPage = () => {
                       getPrice={item.getPrice}
                       quantity={item.quantity!}
                       cartItem={item}
-                      removeItem={store.cart.removeCartItem}
+                      removeItem={cart.removeCartItem}
                       increaseQuant={item.increaseQuantity}
                       decreaseQuant={item.decreaseQuantity}
                     />)}

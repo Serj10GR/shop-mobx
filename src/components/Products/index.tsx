@@ -2,17 +2,16 @@ import { values } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
 import Product from './Product'
-import { store } from '../../stores/rootStore'
-
+import { useStore } from '../../hooks/useStore'
+ 
 import { ProductsWrapper} from './styled'
 
 
-
-
 const Products = () => {
+  const { rootStore, cart } = useStore() 
   return (
     <ProductsWrapper>
-      {values(store.products)
+      {values(rootStore.products)
         .map(product => 
         <Product
           key={product.id} 
@@ -21,7 +20,7 @@ const Products = () => {
           price={product.price!}
           description={product.description?.slice(3, -4)!}
           img={product.img!}
-          addToCart={store.cart.addToCart}
+          addToCart={cart.addToCart}
         />)}
     </ProductsWrapper>
   )

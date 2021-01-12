@@ -2,7 +2,8 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { store } from '../../stores/rootStore'
+import { useStore } from '../../hooks/useStore'
+
 import CustomInput from './components/CustomInput'
 import CustomDropDown from './components/CustomDropDown'
 
@@ -19,6 +20,7 @@ type TAdressForm = {
 }
 
 const AdressForm = ({setIsConfirmed} : TAdressForm) => {
+  const { user } = useStore()
   return (
     <Fragment>
       <FormTitle>Completeaza datele pentru livrare</FormTitle>
@@ -28,27 +30,27 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
           name='name'
           label='Numele'
           type='text'
-          handleChange={(e: any) => store.user.setName(e.target.value)}
-          value={store.user.name}
+          handleChange={(e: any) => user.setName(e.target.value)}
+          value={user.name}
         />
         <CustomInput
           required
           name='tel'
           label='Telefon'
           type='tel'
-          handleChange={(e: any) => store.user.setPhone(e.target.value)}
-          value={store.user.phone}
+          handleChange={(e: any) => user.setPhone(e.target.value)}
+          value={user.phone}
         />
         <CustomInput
           name='adress'
           label='Adresa'
           type='text'
-          handleChange={(e: any) => store.user.setAdress(e.target.value)}
-          value={store.user.adress}
+          handleChange={(e: any) => user.setAdress(e.target.value)}
+          value={user.adress}
         /> 
         <CustomDropDown
-          handleChange={(e: any) => store.user.setCity(e.target.value)}
-          value={store.user.city}
+          handleChange={(e: any) => user.setCity(e.target.value)}
+          value={user.city}
         />
         <ButtonsContainer>
           <Link to='/cart'>

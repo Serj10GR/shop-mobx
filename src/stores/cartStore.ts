@@ -1,6 +1,4 @@
 import { types, Instance, destroy } from 'mobx-state-tree'
-
-
 import { Product, ProductType } from './product'
 
 

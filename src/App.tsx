@@ -2,11 +2,9 @@ import { Fragment, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import GlobalStyle from './globalStyles'
-import { store } from './stores/rootStore'
+import { useStore } from './hooks/useStore'
 
 import NavBar from './components/NavBar'
-
-//pages
 import HomePage from './components/HomePage'
 import AboutPage from './components/AboutPage'
 import ContactPage from './components/ContactPage'
@@ -15,14 +13,14 @@ import CartPage from './components/CartPage'
 import CheckoutPage from './components/CheckoutPage'
 
 
+const App = () => {
+  const {
+    rootStore: {fetchProds, fetchCategories}
+  } = useStore()
 
-
-
-function App() {
   useEffect(() => {
-    console.log('was mount')
-   store.fetchProds()
-   store.fetchCategories()
+   fetchProds()
+   fetchCategories()
   }, [])
 
   return (

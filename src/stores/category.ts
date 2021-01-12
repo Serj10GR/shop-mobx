@@ -5,4 +5,4 @@ export const Category = types.model({
   name: types.optional(types.string, "")
 })
 
-export type CategoryType = Instance<typeof Category>
+export interface CategoryType extends Instance<typeof Category> {}

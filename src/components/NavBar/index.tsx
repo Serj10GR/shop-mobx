@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import {store } from '../../stores/rootStore'
+import { useStore } from '../../hooks/useStore'
 
 import {
   NavBarContainer,
@@ -20,9 +20,10 @@ import {
 } from './styled'
 
 const NavBar = () => {
+  const { cart } = useStore()
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen(!isOpen)
-  const itemsAmount = store.cart.getNumberOfItems()
+  const itemsAmount = cart.getNumberOfItems()
   return (
     <NavBarContainer>
       <NavCenter>

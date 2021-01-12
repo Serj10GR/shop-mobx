@@ -60,12 +60,8 @@ export const RootStore = types
     }
   }))
 
-export const store = RootStore.create({
-  products: [],
 
-})
-
-export type RootStoreType = Instance<typeof RootStore>
+export interface RootStoreType extends Instance<typeof RootStore> {}
 
 
 

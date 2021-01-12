@@ -2,8 +2,7 @@ import { Fragment, useState } from 'react'
 import emailjs from 'emailjs-com';
 import { observer } from 'mobx-react-lite'
 
-
-import { store } from '../../stores/rootStore'
+import { useStore } from '../../hooks/useStore' 
 
 import { Button, ButtonsContainer } from '../AdressForm/styled'
 import { 
@@ -19,14 +18,15 @@ type TConfirm = {
 }
 const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
   const [isSended, setIsSended] = useState(false)
+  const { user, cart } = useStore()
 
   const emailProps = {
-    name: store.user.name,
-    mob: store.user.phone,
-    items:store.cart.cartItems.map((item, ) => `${item.product.name} - ${item.quantity} `).join('/-/'),
-    total: store.cart.getTotalSum(),
-    loc: store.user.city,
-    address: store.user.adress
+    name: user.name,
+    mob: user.phone,
+    items: cart.cartItems.map((item, ) => `${item.product.name} - ${item.quantity} `).join('/-/'),
+    total: cart.getTotalSum(),
+    loc: user.city,
+    address: user.adress
   }
 
   const sendDataByMail = () => {
@@ -46,30 +46,30 @@ const ConfirmBlock = ({setIsConfirmed}: TConfirm) => {
         !isSended
         ? <Fragment>
             <Subtitle>Comanda: </Subtitle>
-            {store.cart.cartItems.map(item => {
+            {cart.cartItems.map(item => {
               return <TextLine>
                 <Cell>{item.product.name}</Cell>
                 <Cell isPrice>{item.product.price}</Cell>
               </TextLine>
             })}
-            <Price>Total: <span>{store.cart.getTotalSum()} MDL</span></Price>
+            <Price>Total: <span>{cart.getTotalSum()} MDL</span></Price>
 
             <Subtitle>Livrare: </Subtitle>
             <TextLine>
               <Cell>Nume:</Cell>
-              <Cell>{store.user.name}</Cell>
+              <Cell>{user.name}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Telefon:</Cell>
-              <Cell>{store.user.phone}</Cell>
+              <Cell>{user.phone}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Adresa:</Cell>
-              <Cell>{store.user.adress}</Cell>
+              <Cell>{user.adress}</Cell>
             </TextLine>
             <TextLine>
               <Cell>Localitate:</Cell>
-              <Cell>{store.user.city}</Cell>
+              <Cell>{user.city}</Cell>
             </TextLine>
 
             <ButtonsContainer isConfirm>
