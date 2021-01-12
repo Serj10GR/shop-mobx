@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react'
 import { DropDownWrapper, Select, Option, Label } from './styled'
 
 type TDropDown  = {
-  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void
   value: string
 }
 const CustomDropDown = ({handleChange, value} : TDropDown) => {

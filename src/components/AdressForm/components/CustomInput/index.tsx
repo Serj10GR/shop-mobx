@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import { InputWrapper, Label, Input } from './styled'
 
 type TInput = {
@@ -5,7 +6,7 @@ type TInput = {
   label: string,
   name: string,
   type: string,
-  handleChange?: any,
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void,
   value: string,
 }
 

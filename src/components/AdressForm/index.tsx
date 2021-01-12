@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, ChangeEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
@@ -30,7 +30,7 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
           name='name'
           label='Numele'
           type='text'
-          handleChange={(e: any) => user.setName(e.target.value)}
+          handleChange={(e: ChangeEvent<HTMLInputElement>) => user.setName(e.target.value)}
           value={user.name}
         />
         <CustomInput
@@ -38,18 +38,18 @@ const AdressForm = ({setIsConfirmed} : TAdressForm) => {
           name='tel'
           label='Telefon'
           type='tel'
-          handleChange={(e: any) => user.setPhone(e.target.value)}
+          handleChange={(e: ChangeEvent<HTMLInputElement>) => user.setPhone(e.target.value)}
           value={user.phone}
         />
         <CustomInput
           name='adress'
           label='Adresa'
           type='text'
-          handleChange={(e: any) => user.setAdress(e.target.value)}
+          handleChange={(e: ChangeEvent<HTMLInputElement>) => user.setAdress(e.target.value)}
           value={user.adress}
         /> 
         <CustomDropDown
-          handleChange={(e: any) => user.setCity(e.target.value)}
+          handleChange={(e: ChangeEvent<HTMLSelectElement>) => user.setCity(e.target.value)}
           value={user.city}
         />
         <ButtonsContainer>

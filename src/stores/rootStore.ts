@@ -23,7 +23,6 @@ export const RootStore = types
     setCategories(categories: Array<TCategory>) {
       self.categories = cast(categories)
     }
-
   }))
 
   //Async calls
@@ -31,7 +30,6 @@ export const RootStore = types
     async fetchProds() {
       const { data } = await commerce.products.list()
       const initProducts = data.map((prod: any) => {
-        // building object to match product model type
         return {
           id: prod.id,
           name: prod.name,
@@ -45,7 +43,6 @@ export const RootStore = types
     async fetchCategories() {
       const { data } = await commerce.categories.list()
       const categories = data.map((category: any) => {
-        // building object to match product model type
         return {
           id: category.id,
           name: category.name,
